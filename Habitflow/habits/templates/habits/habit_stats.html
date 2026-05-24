@@ -1,0 +1,15 @@
+{% extends "habits/base.html" %}
+{% block content %}
+<h1>Statystyki: {{ habit.name }}</h1>
+<p>Streak: {{ streak }} dni</p>
+<p>Procent wykonania: {{ percent|floatformat:2 }}%</p>
+
+<h2>Historia</h2>
+<ul>
+  {% for log in logs %}
+    <li>{{ log.date }} - {% if log.is_done %}wykonano{% else %}nie wykonano{% endif %}</li>
+  {% empty %}
+    <li>Brak historii.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

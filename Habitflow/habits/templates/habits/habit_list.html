@@ -1,0 +1,29 @@
+{% extends "habits/base.html" %}
+{% block content %}
+<h1>Twoje nawyki na {{ today }}</h1>
+
+<a href="{% url 'habit_create' %}">Dodaj nawyk</a>
+
+<ul>
+  {% for habit in habits %}
+    <li>
+      {{ habit.name }}
+
+      <form action="{% url 'toggle_habit_today' habit.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        {% if habit.today_log and habit.today_log.is_done %}
+          <button type="submit">Odznacz</button>
+        {% else %}
+          <button type="submit">Oznacz jako wykonany</button>
+        {% endif %}
+      </form>
+
+      <a href="{% url 'habit_update' habit.id %}">Edytuj</a>
+      <a href="{% url 'habit_delete' habit.id %}">Usuń</a>
+      <a href="{% url 'habit_stats' habit.id %}">Statystyki</a>
+    </li>
+  {% empty %}
+    <li>Brak nawyków. Dodaj pierwszy!</li>
+  {% endfor %}
+</ul>
+{% endblock %}

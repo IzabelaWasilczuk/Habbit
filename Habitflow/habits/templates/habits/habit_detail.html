@@ -1,0 +1,13 @@
+{% extends "habits/base.html" %}
+{% block content %}
+<h1>{{ habit.name }}</h1>
+<p>{{ habit.description }}</p>
+
+{% if confirm_delete %}
+  <p>Czy na pewno chcesz usunąć ten nawyk?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Usuń</button>
+  </form>
+{% endif %}
+{% endblock %}

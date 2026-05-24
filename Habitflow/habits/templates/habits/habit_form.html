@@ -1,0 +1,9 @@
+{% extends "habits/base.html" %}
+{% block content %}
+<h1>{% if habit %}Edytuj nawyk{% else %}Dodaj nawyk{% endif %}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Zapisz</button>
+</form>
+{% endblock %}
